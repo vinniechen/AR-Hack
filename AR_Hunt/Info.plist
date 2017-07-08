@@ -25,7 +25,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Needed for AR</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-  <string>Needed for AR</string>
+	<string>Needed for AR</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

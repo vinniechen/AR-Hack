@@ -47,13 +47,13 @@ class MapViewController: UIViewController {
   
   /* Create three enemies with locations and descriptions */
   func setupLocations() {
-    let firstTarget = ARItem(itemDescription: "wolf", location: CLLocation(latitude: 32.896559, longitude: -117.201024))
+    let firstTarget = ARItem(itemDescription: "wolf", location: CLLocation(latitude: 32.895616, longitude: -117.193001))
     targets.append(firstTarget)
     
-    let secondTarget = ARItem(itemDescription: "tiger", location: CLLocation(latitude: 32.896546, longitude: -117.200995))
+    let secondTarget = ARItem(itemDescription: "tiger", location: CLLocation(latitude: 32.895572, longitude: -117.192935))
     targets.append(secondTarget)
     
-    let thirdTarget = ARItem(itemDescription: "dragon", location: CLLocation(latitude: 32.896594, longitude: -117.201053))
+    let thirdTarget = ARItem(itemDescription: "dragon", location: CLLocation(latitude: 32.895553, longitude: -117.192992))
     targets.append(thirdTarget)
     
     // Add an annotation for each target
