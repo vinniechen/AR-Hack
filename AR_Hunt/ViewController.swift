@@ -42,16 +42,12 @@ class ViewController: UIViewController {
     
   }
   
-  func createCaptureSession() -> (session: AVCaptureSession?, error: NSError) {
-    // Return values
+  func createCaptureSession() -> (session: AVCaptureSession?, error: NSError?) {
     var error: NSError?
     var captureSession: AVCaptureSession?
     
-    
-    // Get the rear camera of the device
     let backVideoDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .back)
     
-    // If camera exists, get its input
     if backVideoDevice != nil {
       var videoInput: AVCaptureDeviceInput!
       do {
@@ -60,48 +56,38 @@ class ViewController: UIViewController {
         error = error1
         videoInput = nil
       }
-    
-      // Create an instance of AVCaptureSession
+      
       if error == nil {
         captureSession = AVCaptureSession()
         
-        // Add the video device as input
         if captureSession!.canAddInput(videoInput) {
           captureSession!.addInput(videoInput)
         } else {
-          error = NSError(domain: "", code: 0, userInfo: ["description": "Error adding video input"])
+          error = NSError(domain: "", code: 0, userInfo: ["description": "Error adding video input."])
         }
       } else {
-        error = NSError(domain: "", code: 1, userInfo: ["description" : "Error creating capture device input"])
+        error = NSError(domain: "", code: 1, userInfo: ["description": "Error creating capture device input."])
       }
-      
     } else {
-      error = NSError(domain: "", code: 2, userInfo: ["description" : "Back video device not found"])
+      error = NSError(domain: "", code: 2, userInfo: ["description": "Back video device not found."])
     }
-  
-    return (session: captureSession, error: error!)
+    
+    return (session: captureSession, error: error)
   }
   
   func loadCamera() {
-    // Get a capture session
     let captureSessionResult = createCaptureSession()
     
-    // If there was an error or captureSession is nil, return/end
     guard captureSessionResult.error == nil, let session = captureSessionResult.session else {
       print("Error creating capture session")
       return
     }
     
-    // Store capture session in cameraSession
     self.cameraSession = session
     
-    // Create a video preview layer
     if let cameraLayer = AVCaptureVideoPreviewLayer(session: self.cameraSession) {
-      
-      // Set videoGravity and sets the frame of the layer to views bounds (fullscreen)
       cameraLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-    
-      // Add the layer as a sublayer and store it in cameraLayer
+      cameraLayer.frame = self.view.bounds
       self.view.layer.insertSublayer(cameraLayer, at: 0)
       self.cameraLayer = cameraLayer
     }
